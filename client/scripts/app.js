@@ -26,15 +26,15 @@ var App = {
       // examine the response from the server request:
       console.log(data);
 
-      for (var i = data.results.length - 1; i >=0; i--) { //for each item, call render
-        if (data.results[i].username !== undefined && data.results[i].text !== undefined){
-          if(!(data.results[i].text.includes("<script>"))) {
-            MessagesView.renderMessage(data.results[i])
+      for (var i = data.results.length - 1; i >= 0; i--) { //for each item, call render
+        if (data.results[i].username !== undefined && data.results[i].text !== undefined) {
+          if (!(data.results[i].text.includes('<script>'))) {
+            MessagesView.renderMessage(data.results[i]);
           }
         }
       }
 
-      callback()
+      callback();
 
       // setInterval(function() {
       //   // $('#chats').html('');

@@ -6,7 +6,7 @@ var FormView = {
     FormView.$form.on('submit', FormView.handleSubmit);
   },
 
-  handleSubmit: function(event) {//event means action (ie click/mouseover/mousemove)
+  handleSubmit: function(event) { //event means action (ie click/mouseover/mousemove)
     // Stop the browser from submitting the form
     event.preventDefault();
 
