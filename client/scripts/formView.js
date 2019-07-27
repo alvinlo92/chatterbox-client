@@ -15,8 +15,8 @@ var FormView = {
     var formUsername = App.username;
     message.username = decodeURI(formUsername);
     message.text = decodeURI(formMessage);
-    message.roomname = 'Lobby'; //still need to get this input!!!
     Parse.create(message);
+    // App.initialize();
 
     console.log('click!!!');
   },

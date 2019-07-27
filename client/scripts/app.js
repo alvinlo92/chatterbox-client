@@ -13,9 +13,20 @@ var App = {
 
     // Fetch initial batch of messages
     App.startSpinner();
+    App.fetch(App.stopSpinner);
     setInterval(function() {
-      $('#chats').html('');
+      // $('#chats').html('');
       App.fetch(App.stopSpinner);
+
+      let list = document.getElementById('chats'); // array of individual messages
+
+      if (list.children.length > 100) {
+        for (var j = 100; j < list.children.length; j++) {
+          list.removeChild(list.children[j]);
+        }
+      }
+
+
       console.log('hello');
     }, 5000);
   },
@@ -30,6 +41,7 @@ var App = {
         if (data.results[i].username !== undefined && data.results[i].text !== undefined) {
           if (!(data.results[i].text.includes('<script>'))) {
             MessagesView.renderMessage(data.results[i]);
+            RoomsView.renderRoom(data.results[i]);
           }
         }
       }
