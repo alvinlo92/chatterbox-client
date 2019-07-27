@@ -4,9 +4,8 @@ var App = {
 
   username: 'anonymous',
 
-  // run after user submits or add or changes room
-  initialize: function() {
-    App.username = window.location.search.substr(10);
+  initialize: function() { //runs immediately when html loads
+    App.username = window.location.search.substr(10); //stores username
 
     FormView.initialize();
     RoomsView.initialize();
@@ -14,8 +13,11 @@ var App = {
 
     // Fetch initial batch of messages
     App.startSpinner();
-    App.fetch(App.stopSpinner);
-
+    setInterval(function() {
+      $('#chats').html('');
+      App.fetch(App.stopSpinner);
+      console.log('hello');
+    }, 5000);
   },
 
   // grabs all messages object and metadata
@@ -24,16 +26,21 @@ var App = {
       // examine the response from the server request:
       console.log(data);
 
-      for (var i = 0; i < data.results.length; i++) { //for each item, call render
+      for (var i = data.results.length - 1; i >=0; i--) { //for each item, call render
         if (data.results[i].username !== undefined && data.results[i].text !== undefined){
           if(!(data.results[i].text.includes("<script>"))) {
             MessagesView.renderMessage(data.results[i])
-            let post = MessageView.render(data.results[i]);
-            MessagesView.renderMessage(post);
           }
         }
       }
+
       callback()
+
+      // setInterval(function() {
+      //   // $('#chats').html('');
+      //   // $('.chats').load();
+      //   console.log('hello');
+      // }, 1000);
     });
   },
 
@@ -45,5 +52,6 @@ var App = {
   stopSpinner: function() {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
-  }
+  },
+
 };

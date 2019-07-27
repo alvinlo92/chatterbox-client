@@ -8,7 +8,7 @@ var MessagesView = {
 
   renderMessage: function(messageObj) {
     let post = MessageView.render(messageObj);
-    MessagesView.$chats.append(post);
+    MessagesView.$chats.prepend(post);
   }
 
 };
