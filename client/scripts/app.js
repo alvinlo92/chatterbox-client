@@ -4,6 +4,7 @@ var App = {
 
   username: 'anonymous',
 
+  // run after user submits or add or changes room
   initialize: function() {
     App.username = window.location.search.substr(10);
 
@@ -17,12 +18,22 @@ var App = {
 
   },
 
+  // grabs all messages object and metadata
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
 
-      callback();
+      for (var i = 0; i < data.results.length; i++) { //for each item, call render
+        if (data.results[i].username !== undefined && data.results[i].text !== undefined){
+          if(!(data.results[i].text.includes("<script>"))) {
+            MessagesView.renderMessage(data.results[i])
+            let post = MessageView.render(data.results[i]);
+            MessagesView.renderMessage(post);
+          }
+        }
+      }
+      callback()
     });
   },
 

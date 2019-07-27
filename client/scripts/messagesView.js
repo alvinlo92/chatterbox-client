@@ -3,9 +3,12 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
+    // MessagesView.renderMessage(post);
   },
 
-  render: function() {
+  renderMessage: function(messageObj) {
+    let post = MessageView.render(messageObj);
+    MessagesView.$chats.append(post);
   }
 
 };

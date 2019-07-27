@@ -6,11 +6,22 @@ var FormView = {
     FormView.$form.on('submit', FormView.handleSubmit);
   },
 
-  handleSubmit: function(event) {
+  handleSubmit: function(event) {//event means actual action (ie click/mouseover)
     // Stop the browser from submitting the form
     event.preventDefault();
-    
-    console.log('click!');
+
+    var message = {};
+    var formMessage = $('#message').val();
+    var formUsername = App.username;
+    message['username'] = decodeURI(formUsername);
+    message['text'] = decodeURI(formMessage);
+    message['roomname'] = 'Lobby';
+    Parse.create(message);
+
+    // return false;//??
+
+    console.log('click!!!');
+    //dynamically update the feed
   },
 
   setStatus: function(active) {
